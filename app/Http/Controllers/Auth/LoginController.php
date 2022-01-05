@@ -4,7 +4,10 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
+use DeepCopy\Filter\Filter;
+use Egulias\EmailValidator\EmailValidator;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Resources\MergeValue;
 
 class LoginController extends Controller
 {
@@ -36,5 +39,12 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+    }
+    public function username()
+    {
+        $value=request()->input(key:'identify');
+        $field=filter_var($value,FILTER_VALIDATE_EMAIL)?'email':'userName';
+         request()->merge([$field=>$value]);
+         return $field;
     }
 }

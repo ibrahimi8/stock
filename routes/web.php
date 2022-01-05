@@ -39,6 +39,6 @@ Route::get('/indexSettings',[settingsController::class,'index'])->name('settings
 Route::get('updateSettings{id?}', [settingsController::class, 'update'])->name('settings.update');
 //                                 login
 Auth::routes(['verify'=>true]);
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware('verified');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 //                                   PDF
 Route::get('/exportPdf{id?}', [salesController::class, 'generatePDF']);
